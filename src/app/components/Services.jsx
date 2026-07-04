@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function ServiceImage({ src, alt }) {
   return (
-    <div className="relative h-56 md:h-64 overflow-hidden">
+    <div className="relative h-24 sm:h-56 md:h-64 shrink-0 overflow-hidden">
       <Image
         src={src}
         alt={alt}
@@ -65,9 +65,7 @@ export default function Services() {
   ];
 
   const gridRef = useRef(null);
-  const cardRefs = useRef([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [cardHeight, setCardHeight] = useState(null);
 
   useEffect(() => {
     const el = gridRef.current;
@@ -88,79 +86,44 @@ export default function Services() {
     return () => observer.disconnect();
   }, []);
 
-  // Description lengths vary per service, so card heights must be measured
-  // and equalized in JS: the tallest card's height wraps differently at
-  // every viewport width, not just at grid breakpoints, so no fixed
-  // CSS min-height/line-clamp value fits every width without either
-  // truncating text or leaving most cards oversized.
-  useLayoutEffect(() => {
-    const equalize = () => {
-      const cards = cardRefs.current.filter(Boolean);
-      if (!cards.length) return;
-      // scrollHeight ignores the card's own overflow-hidden clipping, so it
-      // still reports each card's natural content height even while a
-      // shorter fixed height from a previous measurement is applied.
-      const tallest = Math.max(...cards.map((card) => card.scrollHeight));
-      setCardHeight(tallest);
-    };
-
-    equalize();
-
-    let resizeTimeout;
-    const onResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(equalize, 150);
-    };
-    window.addEventListener("resize", onResize);
-
-    document.fonts?.ready.then(equalize);
-
-    return () => {
-      clearTimeout(resizeTimeout);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
   return (
     <section id="services" className="bg-brand-white">
-      <div className="site-wrapper py-24">
+      <div className="site-wrapper py-24 max-sm:pt-[50px] max-sm:pb-[20px]">
         <h2 className="mx-auto max-w-3xl text-center text-2xl md:text-5xl font-black tracking-tight text-brand-black">
           Services We Offer
         </h2>
 
         <div
           ref={gridRef}
-          className="mt-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+          className="mt-14 grid services-grid gap-8"
         >
           {services.map((service, index) => (
             <div
               key={service.title}
-              ref={(node) => (cardRefs.current[index] = node)}
               className={[
-                "service-card group flex flex-col rounded-2xl overflow-hidden bg-brand-green transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-2xl",
+                "service-card flex flex-col rounded-2xl overflow-hidden bg-brand-green transition-all duration-700 ease-out hover:-translate-y-1",
                 isVisible
                   ? "opacity-100 translate-y-0 scale-100"
                   : "opacity-0 translate-y-12 scale-95",
               ].join(" ")}
               style={{
                 transitionDelay: isVisible ? `${index * 100}ms` : "0ms",
-                height: cardHeight ? `${cardHeight}px` : undefined,
               }}
             >
               <ServiceImage src={service.image} alt={service.title} />
 
-              <div className="flex flex-1 flex-col p-6 md:p-8">
+              <div className="flex flex-1 flex-col p-4 sm:p-6 md:p-8">
                 <h3 className="text-xl md:text-2xl font-bold text-brand-offwhite">
                   {service.title}
                 </h3>
-                <p className="mt-3 text-sm md:text-base text-gray-100 leading-relaxed">
+                <p className="mt-2 sm:mt-3 text-sm md:text-base text-gray-100 leading-relaxed">
                   {service.description}
                 </p>
 
-                <div className="mt-auto pt-5 flex justify-end">
+                <div className="mt-auto pt-3 sm:pt-5 flex justify-end">
                   <Link
                     href={service.href}
-                    className="inline-flex items-center gap-1 text-brand-offwhite font-semibold hover:text-brand-yellow transition-colors"
+                    className="service-card-link inline-flex items-center gap-1 text-brand-offwhite font-semibold transition-colors"
                   >
                     Read more <span aria-hidden="true">&gt;</span>
                   </Link>

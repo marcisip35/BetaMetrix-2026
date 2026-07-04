@@ -5,9 +5,9 @@ export default function About() {
   return (
     <section
       id="about"
-      className="bg-brand-green about-slice min-h-[calc(100vh-var(--header-height,8.5rem))] flex items-center"
+      className="bg-brand-green about-slice min-h-screen flex items-center"
     >
-      <div className="site-wrapper py-28 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="site-wrapper py-28 md:py-32 max-sm:pt-[50px] max-sm:pb-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-brand-offwhite">
             About Us

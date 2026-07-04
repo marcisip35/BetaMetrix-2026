@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function ContactPage() {
+export default function ServicesPage() {
   return (
     <div className="flex min-h-screen flex-col font-sans">
       <Header />

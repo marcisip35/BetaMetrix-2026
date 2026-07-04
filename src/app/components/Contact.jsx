@@ -4,9 +4,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-brand-yellow flex items-center min-h-[calc(100vh-var(--header-height,8.5rem))]"
+      className="bg-brand-yellow flex items-center min-h-[max(740px,100vh)]"
     >
-      <div className="site-wrapper py-24 grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 md:gap-16 items-center">
+      <div className="site-wrapper py-24 max-sm:py-0 grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 md:gap-16 items-center">
         <div>
           <h2 className="font-serif text-4xl md:text-6xl font-bold text-brand-black">
             Let&apos;s Talk Billing
@@ -29,10 +29,13 @@ export default function Contact() {
                   fill="currentColor"
                 />
               </svg>
-              <span>2163 E. Baseline Road, Suite 105, Tempe, AZ 85283</span>
+              <span>2163 E. Baseline Road, Suite 105, Tempe, AZ 85283, USA</span>
             </div>
 
-            <div className="flex items-center gap-3 text-lg font-semibold text-brand-black">
+            <a
+              href="tel:+14314805127"
+              className="flex w-fit items-center gap-3 text-lg font-semibold text-brand-black hover:underline"
+            >
               <svg
                 className="w-6 h-6 flex-shrink-0"
                 viewBox="0 0 24 24"
@@ -44,9 +47,12 @@ export default function Contact() {
                 />
               </svg>
               <span>431-480-5127</span>
-            </div>
+            </a>
 
-            <div className="flex items-center gap-3 text-lg font-semibold text-brand-black">
+            <a
+              href="mailto:Admin@betametrix.us"
+              className="flex w-fit items-center gap-3 text-lg font-semibold text-brand-black hover:underline"
+            >
               <svg
                 className="w-6 h-6 flex-shrink-0"
                 viewBox="0 0 24 24"
@@ -58,7 +64,7 @@ export default function Contact() {
                 />
               </svg>
               <span>Admin@betametrix.us</span>
-            </div>
+            </a>
           </div>
         </div>
 

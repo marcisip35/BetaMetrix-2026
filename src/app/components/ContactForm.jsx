@@ -123,7 +123,7 @@ export default function ContactForm() {
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="mx-auto w-full max-w-xl space-y-4"
+          className="w-full space-y-4"
         >
           <div
             className="contact-form-field bg-brand-white rounded-md border border-black/10 px-4 pt-3 pb-2"

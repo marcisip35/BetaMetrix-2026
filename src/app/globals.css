@@ -24,6 +24,14 @@
   --foreground: #18181b;
 }
 
+/* Below 640px, tighten the vertical gap between each stacked page section
+   by pulling every section (after the first) 5px closer to the one above it. */
+@media (max-width: 639px) {
+  main>*+* {
+    margin-top: -5px;
+  }
+}
+
 /* Brand primary (near-black) colors */
 .bg-brand-black {
   background-color: #18181b;
@@ -100,24 +108,57 @@
   box-shadow: 0 10px 35px rgba(24, 24, 27, 0.22);
 }
 
-/* Header Contact button subtle pulse */
+/* Service card hover shadow: heavier and darker than Tailwind's shadow-2xl.
+   Relies on the card's own transition-all utility to animate smoothly. */
+.service-card:hover {
+  box-shadow: 0 35px 70px -15px rgba(24, 24, 27, 0.45), 0 20px 40px -20px rgba(24, 24, 27, 0.4);
+}
+
+.service-card-link:hover {
+  color: #f2b134;
+}
+
+/* Services grid: 1 column below 800px, 2 columns below 1200px, 3 columns at 1200px+ */
+.services-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 800px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Header Contact button animated border trace */
 @keyframes header-contact-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
+  to {
+    stroke-dashoffset: -100;
   }
 }
 
-.header-contact-pulse {
-  animation: header-contact-pulse 2.2s ease-in-out infinite;
+.header-contact-trace {
+  pointer-events: none;
+  overflow: visible;
 }
 
-.header-contact-pulse:hover {
-  animation-play-state: paused;
+.header-contact-trace-rect {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 20 80;
+  animation: header-contact-pulse 2s linear infinite;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.header-contact-pulse:hover .header-contact-trace-rect {
+  opacity: 0;
 }
 
 /* Contact button 3D upper-left hover */
@@ -170,11 +211,6 @@
 .submit-button-hover:hover {
   background-color: #14b8a6;
   border-color: #14b8a6;
-  transform: translate(-2px, -2px);
-}
-
-.submit-button-hover:active {
-  transform: translate(-1px, -1px);
 }
 
 /* Outline pill button (About section CTA) */
@@ -185,6 +221,82 @@
 .pill-button-outline:hover {
   background-color: #f2b134;
   color: #fafafa;
+}
+
+/* Results heading: shrinks/grows fluidly with viewport width so the
+   nowrap sentence never overflows; caps out at 3rem on wide screens
+   (the original md:text-5xl size) once there's room for it. */
+.results-heading {
+  font-size: clamp(0.5rem, calc(4.1vw - 0.1rem), 1.5rem);
+}
+
+@media (min-width: 640px) {
+  .results-heading {
+    font-size: clamp(0.5rem, calc(4.1vw - 0.25rem), 3rem);
+  }
+}
+
+/* Contact banner text: shrinks fluidly on narrow screens so the sentence
+   always stays on one line without overflowing past the dismiss button;
+   caps out at the original md:text-base size (1rem) on larger screens. */
+.header-banner-text {
+  font-size: clamp(0.15rem, calc(1.55vw - 0.1rem), 1rem);
+}
+
+@media (min-width: 640px) and (max-width: 899px) {
+  .header-banner-text {
+    font-size: clamp(calc(0.15rem + 2px), calc(1.55vw - 0.1rem + 2px), 1rem);
+  }
+}
+
+/* Below 640px the shortened sentence breaks onto two lines, so there's
+   room to use a larger fixed font (letting the banner grow taller) rather
+   than the tiny frozen handoff size. */
+@media (max-width: 639px) {
+  .header-banner-text {
+    font-size: 1rem;
+  }
+}
+
+/* Below 900px the banner shows the shorter sentence (drops the
+   "click the Contact button" clause) so the bigger font above has room
+   without overlapping the dismiss button. */
+.header-banner-short {
+  display: none;
+}
+
+.header-banner-full {
+  display: block;
+}
+
+@media (max-width: 899px) {
+  .header-banner-short {
+    display: block;
+  }
+
+  .header-banner-full {
+    display: none;
+  }
+}
+
+/* Contact banner vertical padding: shorter below 900px. */
+.header-banner-py {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media (min-width: 640px) {
+  .header-banner-py {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media (min-width: 900px) {
+  .header-banner-py {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
 }
 
 /* Nav hover */
@@ -230,9 +342,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--header-height, 8.5rem));
+  min-height: max(700px, 100vh);
   background-color: #101012;
   overflow: hidden;
+}
+
+/* Below 640px use a shorter hero: 80% of the viewport height, but never
+   less than 500px. */
+@media (max-width: 639px) {
+  .hero-section {
+    min-height: max(500px, 90vh);
+  }
 }
 
 /* Background video */
@@ -314,6 +434,10 @@
   padding-left: 4px;
 }
 
+.footer-link:hover .footer-icon {
+  color: #f2b134;
+}
+
 /* Footer contact icons */
 .footer-contact-item {
   display: flex;
@@ -350,6 +474,13 @@
 
 .stat-card {
   animation: fade-in-up 0.7s ease-out both;
+}
+
+@media (max-width: 639px) {
+  .stat-icon svg {
+    width: 53px;
+    height: 53px;
+  }
 }
 
 /* Systems & Technology logos: scroll reveal + hover */
@@ -418,11 +549,23 @@
   }
 }
 
+/* ─── Below 640px: shrink the root font size so all text scales down ─────────
+   Dropping the root from 16px to 14px (87.5%) makes rem-based text scale
+   proportionally — body text drops ~2px, headings drop proportionally more.
+   Note: this also scales rem-based spacing (padding/margins/gaps), so the
+   whole layout tightens slightly, not just the text. */
+@media (max-width: 639px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --breakpoint-nav: 1061px;
 }
 
 body {

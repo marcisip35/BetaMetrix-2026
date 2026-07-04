@@ -52,20 +52,20 @@ export default function SystemsTechnology() {
 
   return (
     <section id="systems-technology" className="bg-brand-white">
-      <div className="site-wrapper py-12 text-center md:h-[calc(100vh-104px)] md:flex md:flex-col">
+      <div className="site-wrapper py-12 max-sm:pt-[50px] max-sm:pb-[20px] text-center md:h-screen md:flex md:flex-col">
         <h3 className="text-sm font-black uppercase tracking-widest text-brand-gray">
           Systems &amp; Technology We Work With
         </h3>
 
         <div
           ref={gridRef}
-          className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:flex-1 md:min-h-0 md:grid-rows-[repeat(7,minmax(0,1fr))] md:gap-x-2 md:gap-y-6"
+          className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 sm:gap-y-6 md:flex-1 md:min-h-0 md:grid-rows-[repeat(7,minmax(0,1fr))] md:gap-x-2 md:gap-y-6"
         >
           {systemLogos.map((logo, index) => (
             <div
               key={logo}
               className={[
-                "systems-logo relative h-32 md:h-auto",
+                "systems-logo relative w-[150px] h-[70px] mx-auto sm:w-full sm:h-32 sm:mx-0 md:w-auto md:h-auto",
                 isVisible && "systems-logo-visible",
               ]
                 .filter(Boolean)
@@ -76,8 +76,8 @@ export default function SystemsTechnology() {
                 src={`/systems_technology/${logo}`}
                 alt={`Systems & technology partner ${index + 1}`}
                 fill
-                className="systems-logo-img object-contain p-4"
-                sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 30vw"
+                className="systems-logo-img object-contain p-1 sm:p-4"
+                sizes="(max-width: 640px) 150px, (max-width: 768px) 45vw, 30vw"
               />
             </div>
           ))}

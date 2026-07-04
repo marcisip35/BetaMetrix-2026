@@ -214,28 +214,28 @@ export default function Results() {
   return (
     <section
       id="results"
-      className="bg-[#EFEDE8] min-h-[calc(100vh-var(--header-height,8.5rem))] flex items-center overflow-x-hidden"
+      className="bg-[#EFEDE8] min-h-screen flex items-center overflow-x-hidden"
     >
-      <div className="site-wrapper py-20">
-        <h2 className="mx-auto text-center whitespace-nowrap text-lg sm:text-2xl md:text-5xl font-normal tracking-tight text-brand-black">
+      <div className="site-wrapper py-20 max-sm:pt-[50px] max-sm:pb-[20px]">
+        <h2 className="results-heading mx-auto text-center whitespace-nowrap font-normal tracking-tight text-brand-black">
           Simplifying Medical Billing for Healthcare Professionals
         </h2>
 
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24">
+        <div className="mt-8 sm:mt-20 grid grid-cols-1 sm:max-nav:grid-cols-2 nav:grid-cols-3 gap-x-12 gap-y-10 sm:gap-y-16">
           {stats.map((stat, index) => (
             <div
               key={stat.title}
-              className="stat-card"
+              className="stat-card max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {stat.icon}
+              <div className="stat-icon">{stat.icon}</div>
 
               <TypedTitle
                 text={stat.title}
-                className="mt-8 min-h-[4.5rem] md:min-h-[5rem] text-3xl md:text-4xl font-bold text-brand-black"
+                className="mt-8 max-sm:min-h-0 min-h-[4.5rem] md:min-h-[5rem] text-3xl md:text-4xl font-bold text-brand-black"
               />
 
-              <p className="mt-4 text-lg md:text-xl text-brand-gray leading-relaxed line-clamp-3">
+              <p className="mt-4 max-sm:mt-2 text-lg md:text-xl text-brand-gray leading-relaxed line-clamp-3">
                 {stat.description}
               </p>
             </div>

@@ -5,14 +5,14 @@ export default function Footer() {
     <footer className="bg-brand-black text-brand-offwhite flex flex-col min-h-[85vh]">
       {/* Link columns */}
       <div className="site-wrapper flex-1 flex items-center py-16">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-24 max-sm:gap-y-12">
           {/* Medical Billing Services */}
-          <div>
-            <h3 className="text-base font-black uppercase tracking-widest text-brand-yellow mb-6">
+          <div className="md:py-6">
+            <h3 className="text-lg font-black uppercase tracking-widest text-brand-yellow mb-6">
               Medical Billing Services
             </h3>
 
-            <ul className="space-y-4 text-lg text-gray-300">
+            <ul className="space-y-4 text-xl max-sm:text-lg text-gray-300">
               <li>
                 <Link href="/services#audits" className="footer-link">
                   Audits
@@ -49,12 +49,12 @@ export default function Footer() {
           </div>
 
           {/* Technology & Softwares */}
-          <div>
-            <h3 className="text-base font-black uppercase tracking-widest text-brand-yellow mb-6">
+          <div className="md:py-6 md:pl-12 md:border-l md:border-gray-700">
+            <h3 className="text-lg font-black uppercase tracking-widest text-brand-yellow mb-6">
               Technology &amp; Softwares
             </h3>
 
-            <ul className="space-y-4 text-lg text-gray-300">
+            <ul className="space-y-4 text-xl max-sm:text-lg text-gray-300">
               <li>
                 <Link href="/#systems-technology" className="footer-link">
                   Our Softwares
@@ -64,19 +64,29 @@ export default function Footer() {
           </div>
 
           {/* About Us */}
-          <div>
-            <h3 className="text-base font-black uppercase tracking-widest text-brand-yellow mb-6">
+          <div className="md:py-6 md:pl-12 md:border-l md:border-gray-700">
+            <h3 className="text-lg font-black uppercase tracking-widest text-brand-yellow mb-6">
               About Us
             </h3>
 
-            <ul className="space-y-4 text-lg text-gray-300">
+            <ul className="space-y-4 text-xl max-sm:text-lg text-gray-300">
               <li>
                 <Link href="/about-us" className="footer-link">
                   Who We Are
                 </Link>
               </li>
 
-              <li>Who We Serve</li>
+              <li>
+                <Link href="/about-us#what-we-do" className="footer-link">
+                  What We Do
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/about-us#who-we-serve" className="footer-link">
+                  Who We Serve
+                </Link>
+              </li>
 
               <li>
                 <Link href="/#results" className="footer-link">
@@ -87,12 +97,12 @@ export default function Footer() {
           </div>
 
           {/* Contact Us */}
-          <div>
-            <h3 className="text-base font-black uppercase tracking-widest text-brand-yellow mb-6">
+          <div className="md:py-6 md:pl-12 md:border-l md:border-gray-700">
+            <h3 className="text-lg font-black uppercase tracking-widest text-brand-yellow mb-6">
               Contact Us
             </h3>
 
-            <ul className="space-y-4 text-lg text-gray-300">
+            <ul className="space-y-4 text-xl max-sm:text-lg text-gray-300">
               <li>
                 <Link href="/contact" className="footer-link">
                   Book A Consultation
@@ -117,42 +127,47 @@ export default function Footer() {
                   />
                 </svg>
 
-                <span>2163 E. Baseline Road, Suite 105, Tempe, AZ 85283</span>
+                <span>2163 E. Baseline Road, Suite 105, Tempe, AZ 85283, USA</span>
               </li>
 
-              <li className="footer-contact-item">
-                <svg
-                  className="footer-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+              <li>
+                <a
+                  href="tel:+16022835920"
+                  className="footer-contact-item footer-link"
                 >
-                  <path
-                    d="M6.6 10.8C8 13.6 10.4 16 13.2 17.4L15.4 15.2C15.7 14.9 16.1 14.8 16.5 14.9C17.7 15.3 19 15.5 20.3 15.5C20.9 15.5 21.3 15.9 21.3 16.5V20.2C21.3 20.8 20.9 21.2 20.3 21.2C10.6 21.2 2.8 13.4 2.8 3.7C2.8 3.1 3.2 2.7 3.8 2.7H7.5C8.1 2.7 8.5 3.1 8.5 3.7C8.5 5 8.7 6.3 9.1 7.5C9.2 7.9 9.1 8.3 8.8 8.6L6.6 10.8Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                  <svg
+                    className="footer-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M6.6 10.8C8 13.6 10.4 16 13.2 17.4L15.4 15.2C15.7 14.9 16.1 14.8 16.5 14.9C17.7 15.3 19 15.5 20.3 15.5C20.9 15.5 21.3 15.9 21.3 16.5V20.2C21.3 20.8 20.9 21.2 20.3 21.2C10.6 21.2 2.8 13.4 2.8 3.7C2.8 3.1 3.2 2.7 3.8 2.7H7.5C8.1 2.7 8.5 3.1 8.5 3.7C8.5 5 8.7 6.3 9.1 7.5C9.2 7.9 9.1 8.3 8.8 8.6L6.6 10.8Z"
+                      fill="currentColor"
+                    />
+                  </svg>
 
-                <span>Tel: (602)-283-5920</span>
+                  <span>Tel: (602)-283-5920</span>
+                </a>
               </li>
 
-              <li className="footer-contact-item">
-                <svg
-                  className="footer-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+              <li>
+                <a
+                  href="mailto:admin@BetaMetrix.us"
+                  className="footer-contact-item footer-link"
                 >
-                  <path
-                    d="M4 5H20C21.1 5 22 5.9 22 7V17C22 18.1 21.1 19 20 19H4C2.9 19 2 18.1 2 17V7C2 5.9 2.9 5 4 5ZM12 12.5L20 7.5V7L12 12L4 7V7.5L12 12.5Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                  <svg
+                    className="footer-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 5H20C21.1 5 22 5.9 22 7V17C22 18.1 21.1 19 20 19H4C2.9 19 2 18.1 2 17V7C2 5.9 2.9 5 4 5ZM12 12.5L20 7.5V7L12 12L4 7V7.5L12 12.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
 
-                <span>
-                  Email:{" "}
-                  <a href="mailto:admin@BetaMetrix.us" className="footer-link">
-                    admin@BetaMetrix.us
-                  </a>
-                </span>
+                  <span>Email: admin@BetaMetrix.us</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -184,7 +199,7 @@ export default function Footer() {
             </p>
 
             <h3 className="text-4xl md:text-5xl font-black tracking-tighter">
-              BetaMetrix
+              <Link href="/">BetaMetrix</Link>
             </h3>
           </div>
         </div>
