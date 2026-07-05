@@ -140,7 +140,7 @@ export default function Header() {
             onClick={() => setIsMenuOpen((open) => !open)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
-            className="nav:hidden text-brand-offwhite p-2 -mr-2"
+            className="nav:hidden text-brand-offwhite p-2 -mr-2 cursor-pointer"
           >
             <svg
               viewBox="0 0 24 24"

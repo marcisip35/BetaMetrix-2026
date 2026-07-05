@@ -39,6 +39,10 @@ export default function Hero() {
 
       <div className="site-wrapper hero-content flex-1 flex items-center justify-center text-center">
         <div className="min-w-0 max-w-6xl mx-auto">
+          <h1 className="sr-only">
+            BetaMetrix – Doctor-Owned Medical Billing Services in Phoenix,
+            Arizona
+          </h1>
           <p className="text-l sm:text-sm font-black uppercase tracking-widest text-brand-yellow">
             Doctor-Owned Medical Billing
           </p>
