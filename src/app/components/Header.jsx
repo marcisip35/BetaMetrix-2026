@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isContactPage = pathname === "/contact";
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBannerOpen, setIsBannerOpen] = useState(true);
@@ -25,6 +29,10 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    // On the contact page the banner is persistent, so skip the auto-hide
+    // that dismisses it when the on-page contact section scrolls into view.
+    if (isContactPage) return;
+
     const contactEl = document.getElementById("contact");
     if (!contactEl) return;
 
@@ -40,11 +48,11 @@ export default function Header() {
     observer.observe(contactEl);
 
     return () => observer.disconnect();
-  }, []);
+  }, [isContactPage]);
 
   return (
     <header
-      className={`w-full bg-brand-black fixed top-0 left-0 z-50 shadow-md transition-all duration-300 ${
+      className={`w-full bg-brand-black sticky top-0 z-50 shadow-md transition-all duration-300 ${
         isScrolled ? "header-scrolled" : ""
       }`}
     >
@@ -162,66 +170,134 @@ export default function Header() {
 
       {/* Contact info banner */}
       {isBannerOpen && (
-        <div className="w-full bg-brand-yellow text-brand-black">
+        <div
+          className={`w-full ${
+            isContactPage ? "bg-white" : "bg-brand-yellow"
+          } text-brand-black`}
+        >
           <div className="site-wrapper header-banner-py flex items-center justify-between gap-4">
-            <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap header-banner-text header-banner-full font-semibold">
-              Call BetaMetrix at{" "}
-              <a
-                href="tel:4314805127"
-                className="font-black underline underline-offset-2"
-              >
-                431-480-5127
-              </a>{" "}
-              or email us at{" "}
-              <a
-                href="mailto:Admin@betametrix.us"
-                className="font-black underline underline-offset-2"
-              >
-                Admin@betametrix.us
-              </a>
-              , or click the Contact button to get in touch.
-            </p>
+            {isContactPage ? (
+              <>
+                <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap header-banner-text header-banner-full font-semibold">
+                  Check the difference we make on our{" "}
+                  <Link
+                    href="/results"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Results
+                  </Link>{" "}
+                  page, and see how we can help on our{" "}
+                  <Link
+                    href="/services"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Services
+                  </Link>{" "}
+                  page.
+                </p>
 
-            <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap max-sm:whitespace-normal header-banner-text header-banner-short font-semibold">
-              Call BetaMetrix at{" "}
-              <a
-                href="tel:4314805127"
-                className="font-black underline underline-offset-2"
-              >
-                431-480-5127
-              </a>
-              <span className="max-sm:hidden">{" "}or{" "}</span>
-              <br className="hidden max-sm:inline" />
-              email us at{" "}
-              <a
-                href="mailto:Admin@betametrix.us"
-                className="font-black underline underline-offset-2"
-              >
-                Admin@betametrix.us
-              </a>
-            </p>
+                <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap max-sm:whitespace-normal header-banner-text header-banner-short font-semibold">
+                  Check our{" "}
+                  <Link
+                    href="/results"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Results
+                  </Link>
+                  <span className="max-sm:hidden">{" "}and{" "}</span>
+                  <br className="hidden max-sm:inline" />
+                  <Link
+                    href="/services"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Services
+                  </Link>
+                </p>
 
-            <button
-              type="button"
-              onClick={() => setIsBannerOpen(false)}
-              aria-label="Dismiss"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-black text-brand-yellow flex-shrink-0 cursor-pointer"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-5 h-5"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsBannerOpen(false)}
+                  aria-label="Dismiss"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-black text-brand-yellow flex-shrink-0 cursor-pointer"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap header-banner-text header-banner-full font-semibold">
+                  Call BetaMetrix at{" "}
+                  <a
+                    href="tel:4314805127"
+                    className="font-black underline underline-offset-2"
+                  >
+                    431-480-5127
+                  </a>{" "}
+                  or email us at{" "}
+                  <a
+                    href="mailto:Admin@betametrix.us"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Admin@betametrix.us
+                  </a>
+                  , or click the Contact button to get in touch.
+                </p>
+
+                <p className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap max-sm:whitespace-normal header-banner-text header-banner-short font-semibold">
+                  Call BetaMetrix at{" "}
+                  <a
+                    href="tel:4314805127"
+                    className="font-black underline underline-offset-2"
+                  >
+                    431-480-5127
+                  </a>
+                  <span className="max-sm:hidden">{" "}or{" "}</span>
+                  <br className="hidden max-sm:inline" />
+                  email us at{" "}
+                  <a
+                    href="mailto:Admin@betametrix.us"
+                    className="font-black underline underline-offset-2"
+                  >
+                    Admin@betametrix.us
+                  </a>
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => setIsBannerOpen(false)}
+                  aria-label="Dismiss"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-black text-brand-yellow flex-shrink-0 cursor-pointer"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -16,7 +16,7 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col font-sans">
       <Header />
       <main className="flex-1">
-        <section className="relative overflow-hidden bg-brand-green min-h-[50vh] max-[639px]:min-h-[350px] min-[1000px]:min-h-[max(500px,85vh)] flex flex-row">
+        <section className="relative overflow-hidden bg-brand-green min-h-[250px] min-[1000px]:min-h-[max(500px,85vh)] flex flex-row">
           {/* Abstract shapes background */}
           <div
             className="pointer-events-none absolute inset-0 z-0"
@@ -40,7 +40,7 @@ export default function AboutPage() {
             <div className="absolute top-24 left-1/3 w-32 h-32 rounded-full bg-brand-yellow/20 blur-lg" />
           </div>
           {/* Left section */}
-          <div className="relative z-10 w-1/2 flex items-end justify-center pt-8">
+          <div className="relative z-10 w-1/2 flex items-end justify-center pt-8 max-[639px]:pt-0">
             {/* About Us hero illustration */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ export default function AboutPage() {
               y="0"
               version="1.1"
               viewBox="170 0 1040 1445"
-              className="w-[264px] max-[639px]:w-auto max-[639px]:h-[240px] max-[639px]:-translate-y-1 min-[640px]:w-[244px] min-[1000px]:w-[516px] h-auto shrink-0"
+              className="w-[264px] max-[639px]:w-auto max-[639px]:h-[230px] max-[639px]:-translate-y-1 min-[640px]:w-[244px] min-[1000px]:w-[516px] h-auto shrink-0"
               role="img"
               aria-label="Business collaboration illustration"
             >
@@ -421,7 +421,7 @@ export default function AboutPage() {
             </svg>
           </div>
           {/* Right section */}
-          <div className="relative z-10 w-1/2 flex flex-col items-start justify-end min-[1000px]:justify-center pt-8 px-8 pb-[10px] min-[1000px]:pb-8">
+          <div className="relative z-10 w-1/2 flex flex-col items-start justify-center pt-8 max-[639px]:pt-[5px] px-8 max-[639px]:px-[5px] pb-[10px] min-[1000px]:pb-8">
             <h1 className="text-5xl max-[639px]:text-2xl! min-[640px]:text-[50px]! min-[1000px]:text-[100px]! lg:text-8xl font-black tracking-tighter text-brand-offwhite text-left">
               About Us
             </h1>

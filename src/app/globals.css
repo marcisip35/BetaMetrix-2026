@@ -32,77 +32,6 @@
   }
 }
 
-/* Brand primary (near-black) colors */
-.bg-brand-black {
-  background-color: #18181b;
-}
-
-.text-brand-black {
-  color: #18181b;
-}
-
-/* White colors */
-.bg-brand-white {
-  background-color: #fafafa;
-}
-
-.text-brand-offwhite {
-  color: #fafafa;
-}
-
-/* Gray colors */
-.bg-brand-gray {
-  background-color: #52525b;
-}
-
-.text-brand-gray {
-  color: #52525b;
-}
-
-/* Navy colors (alias of the primary near-black) */
-.bg-brand-navy {
-  background-color: #18181b;
-}
-
-.text-brand-navy {
-  color: #18181b;
-}
-
-/* Brand accent (teal) colors */
-.bg-brand-green {
-  background-color: #0f766e;
-}
-
-.text-brand-green {
-  color: #0f766e;
-}
-
-.border-brand-green {
-  border-color: #0f766e;
-}
-
-/* Brand accent (yellow) colors */
-.bg-brand-yellow {
-  background-color: #f2b134;
-}
-
-.text-brand-yellow {
-  color: #f2b134;
-}
-
-.border-brand-yellow {
-  border-color: #f2b134;
-}
-
-/* Border colors */
-.border-brand-black {
-  border-color: #18181b;
-}
-
-.border-brand-gray {
-  border-color: #52525b;
-}
-
 /* Header scroll shadow */
 .header-scrolled {
   box-shadow: 0 10px 35px rgba(24, 24, 27, 0.22);
@@ -243,18 +172,11 @@
   font-size: clamp(0.15rem, calc(1.55vw - 0.1rem), 1rem);
 }
 
-@media (min-width: 640px) and (max-width: 899px) {
+/* Below 1000px the banner text uses a fixed, larger size instead of the
+   fluid clamp. */
+@media (max-width: 999px) {
   .header-banner-text {
-    font-size: clamp(calc(0.15rem + 2px), calc(1.55vw - 0.1rem + 2px), 1rem);
-  }
-}
-
-/* Below 640px the shortened sentence breaks onto two lines, so there's
-   room to use a larger fixed font (letting the banner grow taller) rather
-   than the tiny frozen handoff size. */
-@media (max-width: 639px) {
-  .header-banner-text {
-    font-size: 1rem;
+    font-size: 14px;
   }
 }
 
@@ -342,7 +264,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: max(700px, 100vh);
+  min-height: max(700px, 90vh);
   background-color: #101012;
   overflow: hidden;
 }
@@ -566,6 +488,28 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --breakpoint-nav: 1061px;
+
+  /* Brand colors, registered as real Tailwind theme tokens (not plain CSS
+     classes) so variants like hover and group-hover are generated for the
+     bg-brand, text-brand, and border-brand utilities automatically. */
+  --color-brand-black: #18181b;
+  --color-brand-white: #fafafa;
+  --color-brand-offwhite: #fafafa;
+  --color-brand-gray: #52525b;
+  --color-brand-navy: #18181b;
+  --color-brand-green: #0f766e;
+  --color-brand-yellow: #f2b134;
+}
+
+/* If any element ends up wider than the viewport, the page becomes
+   horizontally scrollable and a background-colored gutter appears beside
+   every 100%-width section (noticeable when rotating a phone). Clipping
+   horizontal overflow at the root prevents that. clip (not hidden) is used
+   so the body doesn't become a scroll container, which would break the
+   sticky header. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {

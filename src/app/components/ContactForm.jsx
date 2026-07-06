@@ -15,7 +15,9 @@ const specialties = [
 
 const initialForm = { name: "", email: "", phone: "", specialty: "" };
 
-export default function ContactForm() {
+export default function ContactForm({
+  intro = "Fill this out if you're interested and we will reach back within 1-2 business days.",
+}) {
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -105,8 +107,7 @@ export default function ContactForm() {
           className="contact-form-field mb-6 text-center text-[11px] sm:text-xs md:text-sm font-black uppercase tracking-wide text-brand-gray"
           style={{ transitionDelay: "0ms" }}
         >
-          Fill this out if you&apos;re interested and we will reach back
-          within 1-2 business days.
+          {intro}
         </p>
       )}
 
